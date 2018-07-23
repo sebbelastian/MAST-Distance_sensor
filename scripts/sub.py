@@ -3,9 +3,10 @@ import rospy
 from distance_sensor.msg import sensor_values
 
 def dembitches(data):
-	rospy.loginfo(rospy.get_caller_id() + " Range_left: %f", data.left_sensor)
-	rospy.loginfo(rospy.get_caller_id() + " Range_middle: %f", data.middle_sensor)
-	rospy.loginfo(rospy.get_caller_id() + " Range_right: %f", data.right_sensor)
+	rospy.loginfo(" Range_left: {}" .format(data.left_sensor))
+	rospy.loginfo(" Range_middle: {}" .format(data.middle_sensor))
+	rospy.loginfo(" Range_right: {}" .format(data.right_sensor))
+	rospy.loginfo(" ERROR: {}".format(data.error))
 	rospy.loginfo("-------------------------------")
 
 def main():
