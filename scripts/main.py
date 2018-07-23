@@ -30,10 +30,23 @@ bus = smbus.SMBus(0)
 val = [0L,0L,0L]
 
 def main():
+	try:
+		bus.write_byte(DEVICE_ADDRESS_LEFT, DEVICE_REG_MODE_TRIGGER_LEFT)
+	except IOError as e:
+		rospy.loginfo("ERROR occured with Left sensor {err}".format(err=DEVICE_ADDRESS_LEFT))
+		return e.errno
 
-	bus.write_byte(DEVICE_ADDRESS_LEFT, DEVICE_REG_MODE_TRIGGER_LEFT)
-	bus.write_byte(DEVICE_ADDRESS_MIDDLE, DEVICE_REG_MODE_TRIGGER_MIDDLE)
-	bus.write_byte(DEVICE_ADDRESS_RIGHT, DEVICE_REG_MODE_TRIGGER_RIGHT)
+	try:
+		bus.write_byte(DEVICE_ADDRESS_MIDDLE, DEVICE_REG_MODE_TRIGGER_MIDDLE)
+	except IOError as e:
+		rospy.loginfo("ERROR occured with Middle sensor {err}".format(err=DEVICE_ADDRESS_MIDDLE))
+		return e.errno
+
+	try:
+		bus.write_byte(DEVICE_ADDRESS_RIGHT, DEVICE_REG_MODE_TRIGGER_RIGHT)
+	except IOError as e:
+		return e.errno
+
 	time.sleep(0.2)
 
 	while not rospy.is_shutdown():
