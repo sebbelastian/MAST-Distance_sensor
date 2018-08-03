@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-# File 			:	main.py
-# Author 		:	Sebastian Andersson
-# Co Author 	:	Magnus Sörensen & Jacob Norman
+# File			:	main.py
+# Author		:	Sebastian Andersson
+# Co Author		:	Magnus Sorensen & Jacob Norman
 # Description	: 	A program that initiate three 'Teraranger Evo 60m' sensors, and then publish its data
 # 					on a topic 'sensor_distance'. The data sent is stored in the sensor_values class, which
 #					contain left, middle and right sensor values, as well as the error codes from each sensor
@@ -40,32 +40,32 @@ bus = smbus.SMBus(0)
 val = [0L,0L,0L]
 
 def main():
-	rospy.loginfo("publisher node entered main")
+	rospy.loginfo(rospy.get_caller_id() + " node entered main")
 	time.sleep(0.4)
-	rospy.loginfo("trying to initiate sensors")
+	rospy.loginfo(rospy.get_caller_id() + " initialization process begun ")
 	data.error = [0, 0, 0]
 	try:
 		bus.write_byte(DEVICE_ADDRESS_LEFT, DEVICE_REG_MODE_TRIGGER_LEFT)
 	except IOError as e:
-		rospy.loginfo("ERROR [{num}] occured with left sensor 0x31".format(num=e.errno))
+		rospy.loginfo(rospy.get_caller_id() + " ERROR [{num}] occured with left sensor 0x31".format(num=e.errno))
 		return e.errno
 
 	try:
 		bus.write_byte(DEVICE_ADDRESS_MIDDLE, DEVICE_REG_MODE_TRIGGER_MIDDLE)
 	except IOError as e:
-		rospy.loginfo("ERROR [{num}] occured with middle sensor 0x33".format(num=e.errno))
+		rospy.loginfo(rospy.get_caller_id() + " ERROR [{num}] occured with middle sensor 0x33".format(num=e.errno))
 		return e.errno
 
 	try:
 		bus.write_byte(DEVICE_ADDRESS_RIGHT, DEVICE_REG_MODE_TRIGGER_RIGHT)
 	except IOError as e:
-		rospy.loginfo("ERROR [{num}] occured with right sensor 0x35".format(num=e.errno))
+		rospy.loginfo(rospy.get_caller_id() + " ERROR [{num}] occured with right sensor 0x35".format(num=e.errno))
 		return e.errno
 
 	time.sleep(0.8)
-	rospy.loginfo("sensor initialization successful")
+	rospy.loginfo(rospy.get_caller_id() + " initialization successful")
 	rospy.loginfo("--------------------------------")
-	rospy.loginfo("sensors are now publishing data")
+	rospy.loginfo(" sensors are now publishing data")
 	rospy.loginfo("--------------------------------")
 # ----------------------------------------------------------------------------------------------------
 # loop -----------------------------------------------------------------------------------------------
