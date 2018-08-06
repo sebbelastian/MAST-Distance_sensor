@@ -1,0 +1,13 @@
+<!-- File					: ROS_launch.launch -->
+<!-- Author				: Sebastian Andersson -->
+<!-- Email				: san13015@student.mdh.se -->
+<!-- Description	: A file to launch the neccessary ROS nodes. -->
+
+<!-- pkg: The name of the package -->
+<!-- type: The executable file for the package -->
+<!-- name: The name that the node will receive -->
+
+<launch>
+	<node name="sensors" pkg="distance_sensor" type="main.py" output="screen"/>
+	<node name="subscriber" pkg="distance_sensor" type="sub.py" />
+</launch>
