@@ -20,7 +20,7 @@ import smbus
 data = sensor_values()
 pub  = rospy.Publisher('sensor_distance', data_class=sensor_values, queue_size=1000)
 rospy.init_node('Teraranger', anonymous=False)
-update_rate = rospy.Rate(5)
+update_rate = rospy.Rate(200)
 
 DEVICE_ADDRESS_LEFT = 0x31
 DEVICE_REG_MODE_TRIGGER_LEFT = 0x62
